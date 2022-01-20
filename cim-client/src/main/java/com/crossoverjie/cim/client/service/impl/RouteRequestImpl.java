@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Function:
@@ -111,7 +112,7 @@ public class RouteRequestImpl implements RouteRequest {
                 echoService.echo(cimServerResVO.getMessage());
 
                 // when client in reConnect state, could not exit.
-                if (ContextHolder.getReconnect()){
+                if (Objects.nonNull(ContextHolder.getReconnect()) && ContextHolder.getReconnect()){
                     echoService.echo("###{}###", StatusEnum.RECONNECT_FAIL.getMessage());
                     throw new CIMException(StatusEnum.RECONNECT_FAIL);
                 }
